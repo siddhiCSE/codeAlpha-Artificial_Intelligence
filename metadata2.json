@@ -1,0 +1,6 @@
+{
+  "name": "CodeAlpha AI Internship Suite",
+  "description": "An interactive AI portfolio showcasing three advanced tasks: a multi-language Translator with TTS, an FAQ Chatbot powered by custom TF-IDF & Cosine Similarity matching, and a real-time Object Detection and Centroid Tracking system using TensorFlow.js.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

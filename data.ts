@@ -1,0 +1,588 @@
+import { Flashcard, Quote, DailyFitness, VocabWord, QuizQuestion, Language, InternshipTask, LanguageCode } from "./types";
+
+export const LANGUAGES: Language[] = [
+  { code: "es", name: "Spanish", flag: "🇪🇸", nativeName: "Español" },
+  { code: "fr", name: "French", flag: "🇫🇷", nativeName: "Français" },
+  { code: "de", name: "German", flag: "🇩🇪", nativeName: "Deutsch" },
+  { code: "ja", name: "Japanese", flag: "🇯🇵", nativeName: "日本語" },
+  { code: "it", name: "Italian", flag: "🇮🇹", nativeName: "Italiano" },
+];
+
+export const INITIAL_FLASHCARDS: Flashcard[] = [
+  {
+    id: "fc1",
+    question: "What is the difference between let and const in JavaScript?",
+    answer: "let allows re-assignment of variables and is block-scoped, while const does not allow re-assignment (though object properties can still be modified) and is also block-scoped.",
+    category: "JavaScript",
+    createdAt: Date.now() - 100000,
+  },
+  {
+    id: "fc2",
+    question: "What is React Virtual DOM?",
+    answer: "A lightweight copy of the real DOM kept in memory. React uses it to calculate minimal updates (diffing) before re-rendering the actual DOM, improving performance.",
+    category: "React",
+    createdAt: Date.now() - 90000,
+  },
+  {
+    id: "fc3",
+    question: "Explain the purpose of CSS flexbox.",
+    answer: "Flexbox is a one-dimensional layout model designed for laying out items in rows or columns. It excels at distributing space and aligning items within containers.",
+    category: "CSS",
+    createdAt: Date.now() - 80000,
+  },
+  {
+    id: "fc4",
+    question: "What does semantic HTML mean?",
+    answer: "Using HTML tags that describe their meaning and purpose to both the browser and developer (e.g., <article>, <header>, <footer> instead of generic <div>s).",
+    category: "HTML",
+    createdAt: Date.now() - 70000,
+  },
+  {
+    id: "fc5",
+    question: "What is an asynchronous function (async/await) in TypeScript?",
+    answer: "A syntactic sugar built on top of Promises that allows writing asynchronous code in a linear, synchronous-looking style, making it easier to read and maintain.",
+    category: "TypeScript",
+    createdAt: Date.now() - 60000,
+  },
+];
+
+export const INITIAL_QUOTES: Quote[] = [
+  {
+    id: "q1",
+    text: "The best error message is the one that never shows up.",
+    author: "Thomas Edison of Software",
+    category: "Coding",
+  },
+  {
+    id: "q2",
+    text: "Simplicity is the soul of efficiency.",
+    author: "Austin Freeman",
+    category: "Inspirational",
+  },
+  {
+    id: "q3",
+    text: "Talk is cheap. Show me the code.",
+    author: "Linus Torvalds",
+    category: "Coding",
+  },
+  {
+    id: "q4",
+    text: "The only way to do great work is to love what you do.",
+    author: "Steve Jobs",
+    category: "Inspirational",
+  },
+  {
+    id: "q5",
+    text: "Programs must be written for people to read, and only incidentally for machines to execute.",
+    author: "Harold Abelson",
+    category: "Coding",
+  },
+  {
+    id: "q6",
+    text: "Strive not to be a success, but rather to be of value.",
+    author: "Albert Einstein",
+    category: "Inspirational",
+  },
+  {
+    id: "q7",
+    text: "Make it work, make it right, make it fast.",
+    author: "Kent Beck",
+    category: "Coding",
+  },
+  {
+    id: "q8",
+    text: "Your time is limited, so don't waste it living someone else's life.",
+    author: "Steve Jobs",
+    category: "Inspirational",
+  },
+];
+
+export const MOCK_FITNESS_HISTORY: DailyFitness[] = [
+  {
+    date: "2026-06-29",
+    steps: 6200,
+    stepsGoal: 8000,
+    water: 1500,
+    waterGoal: 2000,
+    caloriesGoal: 2500,
+    workouts: [
+      { id: "w1", type: "Cardio Walk", duration: 30, calories: 180, timestamp: 1782723600000 },
+    ],
+  },
+  {
+    date: "2026-06-30",
+    steps: 8100,
+    stepsGoal: 8000,
+    water: 2100,
+    waterGoal: 2000,
+    caloriesGoal: 2500,
+    workouts: [
+      { id: "w2", type: "Running", duration: 25, calories: 310, timestamp: 1782810000000 },
+    ],
+  },
+  {
+    date: "2026-07-01",
+    steps: 4500,
+    stepsGoal: 8000,
+    water: 1200,
+    waterGoal: 2000,
+    caloriesGoal: 2500,
+    workouts: [],
+  },
+  {
+    date: "2026-07-02",
+    steps: 9200,
+    stepsGoal: 8000,
+    water: 2500,
+    waterGoal: 2000,
+    caloriesGoal: 2500,
+    workouts: [
+      { id: "w3", type: "Weight Lifting", duration: 45, calories: 240, timestamp: 1782982800000 },
+      { id: "w4", type: "Yoga", duration: 20, calories: 90, timestamp: 1782986400000 },
+    ],
+  },
+  {
+    date: "2026-07-03",
+    steps: 7800,
+    stepsGoal: 8000,
+    water: 1800,
+    waterGoal: 2000,
+    caloriesGoal: 2500,
+    workouts: [
+      { id: "w5", type: "Cycling", duration: 30, calories: 220, timestamp: 1783069200000 },
+    ],
+  },
+  {
+    date: "2026-07-04",
+    steps: 10400,
+    stepsGoal: 8000,
+    water: 2800,
+    waterGoal: 2000,
+    caloriesGoal: 2500,
+    workouts: [
+      { id: "w6", type: "Hiking", duration: 60, calories: 450, timestamp: 1783155600000 },
+    ],
+  },
+  {
+    date: "2026-07-05", // Today
+    steps: 5400,
+    stepsGoal: 8000,
+    water: 1000,
+    waterGoal: 2000,
+    caloriesGoal: 2500,
+    workouts: [
+      { id: "w7", type: "Yoga", duration: 15, calories: 70, timestamp: Date.now() - 3600000 },
+    ],
+  },
+];
+
+export const VOCABULARY_DATA: Record<LanguageCode, VocabWord[]> = {
+  es: [
+    {
+      id: "es1",
+      word: "Hola",
+      translation: "Hello",
+      pronunciation: "oh-lah",
+      category: "vocabulary",
+      example: "Hola, ¿cómo estás?",
+      exampleTranslation: "Hello, how are you?",
+    },
+    {
+      id: "es2",
+      word: "Gracias",
+      translation: "Thank you",
+      pronunciation: "grah-syahs",
+      category: "vocabulary",
+      example: "Muchas gracias por la comida.",
+      exampleTranslation: "Thank you very much for the food.",
+    },
+    {
+      id: "es3",
+      word: "Buenos días",
+      translation: "Good morning",
+      pronunciation: "bweh-nohs dee-ahs",
+      category: "phrases",
+      example: "Buenos días a todos.",
+      exampleTranslation: "Good morning to everyone.",
+    },
+    {
+      id: "es4",
+      word: "El libro",
+      translation: "The book",
+      pronunciation: "el lee-broh",
+      category: "vocabulary",
+      example: "Este es mi libro favorito.",
+      exampleTranslation: "This is my favorite book.",
+    },
+    {
+      id: "es5",
+      word: "Yo tengo un sueño",
+      translation: "I have a dream",
+      pronunciation: "yoh ten-goh oon sweh-nyoh",
+      category: "grammar",
+      example: "Yo tengo un sueño para el futuro.",
+      exampleTranslation: "I have a dream for the future.",
+    },
+  ],
+  fr: [
+    {
+      id: "fr1",
+      word: "Bonjour",
+      translation: "Hello / Good morning",
+      pronunciation: "bohn-zhoor",
+      category: "vocabulary",
+      example: "Bonjour, comment ça va ?",
+      exampleTranslation: "Hello, how is it going?",
+    },
+    {
+      id: "fr2",
+      word: "Merci",
+      translation: "Thank you",
+      pronunciation: "mair-see",
+      category: "vocabulary",
+      example: "Merci beaucoup pour votre aide.",
+      exampleTranslation: "Thank you very much for your help.",
+    },
+    {
+      id: "fr3",
+      word: "S'il vous plaît",
+      translation: "Please (formal)",
+      pronunciation: "seel voo pleh",
+      category: "phrases",
+      example: "Un café, s'il vous plaît.",
+      exampleTranslation: "A coffee, please.",
+    },
+    {
+      id: "fr4",
+      word: "La pomme",
+      translation: "The apple",
+      pronunciation: "lah puhm",
+      category: "vocabulary",
+      example: "Je mange une pomme rouge.",
+      exampleTranslation: "I am eating a red apple.",
+    },
+    {
+      id: "fr5",
+      word: "Je suis fatigué",
+      translation: "I am tired",
+      pronunciation: "zhuh swee fah-tee-gay",
+      category: "grammar",
+      example: "Je suis fatigué ce soir.",
+      exampleTranslation: "I am tired tonight.",
+    },
+  ],
+  de: [
+    {
+      id: "de1",
+      word: "Hallo",
+      translation: "Hello",
+      pronunciation: "hah-loh",
+      category: "vocabulary",
+      example: "Hallo! Wie geht es dir?",
+      exampleTranslation: "Hello! How are you?",
+    },
+    {
+      id: "de2",
+      word: "Danke",
+      translation: "Thank you",
+      pronunciation: "dahn-kuh",
+      category: "vocabulary",
+      example: "Danke für das schöne Geschenk.",
+      exampleTranslation: "Thank you for the beautiful gift.",
+    },
+    {
+      id: "de3",
+      word: "Guten Tag",
+      translation: "Good day / afternoon",
+      pronunciation: "goo-ten tahg",
+      category: "phrases",
+      example: "Guten Tag, Herr Schmidt.",
+      exampleTranslation: "Good afternoon, Mr. Schmidt.",
+    },
+    {
+      id: "de4",
+      word: "Das Wasser",
+      translation: "The water",
+      pronunciation: "dahs vahs-uhr",
+      category: "vocabulary",
+      example: "Ich trinke ein Glas Wasser.",
+      exampleTranslation: "I am drinking a glass of water.",
+    },
+    {
+      id: "de5",
+      word: "Ich habe Hunger",
+      translation: "I am hungry (literally: I have hunger)",
+      pronunciation: "ikh hah-buh hoon-guhr",
+      category: "grammar",
+      example: "Ich habe Hunger, lass uns essen.",
+      exampleTranslation: "I am hungry, let's eat.",
+    },
+  ],
+  ja: [
+    {
+      id: "ja1",
+      word: "こんにちは (Konnichiwa)",
+      translation: "Hello",
+      pronunciation: "kohn-nee-chee-wah",
+      category: "vocabulary",
+      example: "皆さん、こんにちは。",
+      exampleTranslation: "Hello, everyone.",
+    },
+    {
+      id: "ja2",
+      word: "ありがとう (Arigatou)",
+      translation: "Thank you",
+      pronunciation: "ah-ree-gah-toh",
+      category: "vocabulary",
+      example: "手伝ってくれてありがとう。",
+      exampleTranslation: "Thank you for helping me.",
+    },
+    {
+      id: "ja3",
+      word: "お元気ですか (O-genki desu ka?)",
+      translation: "How are you?",
+      pronunciation: "oh-ghen-kee-deh-soo-kah",
+      category: "phrases",
+      example: "お久しぶりです、お元気ですか？",
+      exampleTranslation: "Long time no see, how are you?",
+    },
+    {
+      id: "ja4",
+      word: "水 (Mizu)",
+      translation: "Water",
+      pronunciation: "mee-zoo",
+      category: "vocabulary",
+      example: "冷たい水をください。",
+      exampleTranslation: "Cold water, please.",
+    },
+    {
+      id: "ja5",
+      word: "猫が好きです (Neko ga suki desu)",
+      translation: "I like cats",
+      pronunciation: "neh-koh-gah-soo-kee-deh-soo",
+      category: "grammar",
+      example: "私は犬より猫が好きです。",
+      exampleTranslation: "I like cats more than dogs.",
+    },
+  ],
+  it: [
+    {
+      id: "it1",
+      word: "Ciao",
+      translation: "Hello / Goodbye",
+      pronunciation: "chow",
+      category: "vocabulary",
+      example: "Ciao! Come stai?",
+      exampleTranslation: "Hello! How are you?",
+    },
+    {
+      id: "it2",
+      word: "Grazie",
+      translation: "Thank you",
+      pronunciation: "grah-tsy-eh",
+      category: "vocabulary",
+      example: "Grazie mille per l'invito.",
+      exampleTranslation: "Thank you very much for the invitation.",
+    },
+    {
+      id: "it3",
+      word: "Buongiorno",
+      translation: "Good morning / day",
+      pronunciation: "bwon-johr-noh",
+      category: "phrases",
+      example: "Buongiorno, vorrei un croissant.",
+      exampleTranslation: "Good morning, I would like a croissant.",
+    },
+    {
+      id: "it4",
+      word: "La pizza",
+      translation: "The pizza",
+      pronunciation: "lah peet-tsah",
+      category: "vocabulary",
+      example: "Stasera mangiamo una pizza margherita.",
+      exampleTranslation: "Tonight we are eating a Margherita pizza.",
+    },
+    {
+      id: "it5",
+      word: "Mi piace viaggiare",
+      translation: "I like to travel",
+      pronunciation: "mee pyah-cheh vyahd-jah-reh",
+      category: "grammar",
+      example: "Mi piace viaggiare in Italia d'estate.",
+      exampleTranslation: "I like to travel in Italy during summer.",
+    },
+  ],
+};
+
+export const QUIZ_DATA: Record<LanguageCode, QuizQuestion[]> = {
+  es: [
+    {
+      id: "esq1",
+      question: "Which of the following means 'Thank you' in Spanish?",
+      options: ["Hola", "Gracias", "Adiós", "Por favor"],
+      correctAnswer: "Gracias",
+      explanation: "Gracias is 'Thank you', Hola is 'Hello', Adiós is 'Goodbye', and Por favor is 'Please'.",
+    },
+    {
+      id: "esq2",
+      question: "What does 'Buenos días' translate to?",
+      options: ["Good morning", "Good afternoon", "Good night", "Goodbye"],
+      correctAnswer: "Good morning",
+      explanation: "Buenos días is used to say Good morning, typically from sunrise to noon.",
+    },
+    {
+      id: "esq3",
+      question: "Which of these is the correct definite article for a masculine singular noun (e.g. 'book')?",
+      options: ["La", "El", "Los", "Las"],
+      correctAnswer: "El",
+      explanation: "El is the singular masculine definite article, as in 'El libro' (The book).",
+    },
+  ],
+  fr: [
+    {
+      id: "frq1",
+      question: "What does 'Bonjour' mean?",
+      options: ["Goodbye", "Thank you", "Hello / Good morning", "Please"],
+      correctAnswer: "Hello / Good morning",
+      explanation: "Bonjour is the universal greeting used during the day meaning Hello or Good morning.",
+    },
+    {
+      id: "frq2",
+      question: "How do you say 'Please' formally in French?",
+      options: ["Merci", "De rien", "S'il vous plaît", "Enchanté"],
+      correctAnswer: "S'il vous plaît",
+      explanation: "S'il vous plaît is the formal/polite way to say Please. 'S'il te plaît' is informal.",
+    },
+    {
+      id: "frq3",
+      question: "What is 'La pomme' in English?",
+      options: ["The banana", "The apple", "The orange", "The grape"],
+      correctAnswer: "The apple",
+      explanation: "La pomme translates directly to 'The apple' in English.",
+    },
+  ],
+  de: [
+    {
+      id: "deq1",
+      question: "Which word means 'Water' in German?",
+      options: ["Brot", "Bier", "Milch", "Wasser"],
+      correctAnswer: "Wasser",
+      explanation: "Wasser means water. Brot is bread, Bier is beer, and Milch is milk.",
+    },
+    {
+      id: "deq2",
+      question: "What does 'Danke' mean?",
+      options: ["Please", "Hello", "Thank you", "Excuse me"],
+      correctAnswer: "Thank you",
+      explanation: "Danke is the standard German word for 'Thank you'.",
+    },
+    {
+      id: "deq3",
+      question: "Which greeting corresponds to 'Good afternoon / Good day'?",
+      options: ["Guten Morgen", "Guten Tag", "Guten Abend", "Gute Nacht"],
+      correctAnswer: "Guten Tag",
+      explanation: "Guten Tag translates to 'Good day' or 'Good afternoon'. 'Guten Morgen' is Good morning.",
+    },
+  ],
+  ja: [
+    {
+      id: "jaq1",
+      question: "What is the standard romaji spelling of the greeting 'こんにちは'?",
+      options: ["Sayonara", "Arigatou", "Konnichiwa", "Ogenki"],
+      correctAnswer: "Konnichiwa",
+      explanation: "Konnichiwa is the romaji representation of 'こんにちは', which means Hello.",
+    },
+    {
+      id: "jaq2",
+      question: "What does the Japanese word '水 (mizu)' mean?",
+      options: ["Rice", "Water", "Fire", "Tree"],
+      correctAnswer: "Water",
+      explanation: "水 (mizu) means water in Japanese.",
+    },
+    {
+      id: "jaq3",
+      question: "How do you say 'Thank you' informally in Japanese?",
+      options: ["Arigatou", "Konnichiwa", "Sumimasen", "Gomenasai"],
+      correctAnswer: "Arigatou",
+      explanation: "Arigatou is 'Thank you' (informal). Sumimasen is 'Excuse me' or 'Sorry'.",
+    },
+  ],
+  it: [
+    {
+      id: "itq1",
+      question: "What does 'Ciao' mean?",
+      options: ["Only Hello", "Only Goodbye", "Both Hello and Goodbye", "Thank you"],
+      correctAnswer: "Both Hello and Goodbye",
+      explanation: "Ciao is an informal Italian greeting used both when arriving (Hello) and leaving (Goodbye).",
+    },
+    {
+      id: "itq2",
+      question: "How do you say 'Thank you' in Italian?",
+      options: ["Prego", "Grazie", "Scusa", "Per favore"],
+      correctAnswer: "Grazie",
+      explanation: "Grazie means 'Thank you'. Prego is 'You're welcome', and Per favore is 'Please'.",
+    },
+    {
+      id: "itq3",
+      question: "What is 'Buongiorno'?",
+      options: ["Good morning / Good day", "Good evening", "Good night", "See you later"],
+      correctAnswer: "Good morning / Good day",
+      explanation: "Buongiorno translates to 'Good morning' or 'Good day'.",
+    },
+  ],
+};
+
+export const INTERNSHIP_TASKS_INFO: InternshipTask[] = [
+  {
+    id: "task1",
+    title: "Flashcard Quiz App",
+    taskNumber: 1,
+    description: "Build an interactive studying app featuring side-flippable cards, standard controls, and deck customizer capabilities.",
+    completed: true,
+    keyFeatures: [
+      "Front and Back flashcard faces with intuitive 'Show Answer' triggers",
+      "Dynamic navigation deck controls ('Next' and 'Previous')",
+      "Full custom CRUD management: Create, Read, Update, and Delete flashcards",
+      "Categorized deck management for easier topical studying"
+    ]
+  },
+  {
+    id: "task2",
+    title: "Random Quote Generator",
+    taskNumber: 2,
+    description: "Develop a clean and minimal widget that fetches motivational phrases on-demand with advanced custom favoriting and sharing tools.",
+    completed: true,
+    keyFeatures: [
+      "Randomized quote display on widget load and on manual button clicks",
+      "Clear formatting of text body paired with proper attribution lines",
+      "Personalized favorites folder saved securely inside browser local storage",
+      "Copy-to-clipboard functionality and direct Twitter sharing integration"
+    ]
+  },
+  {
+    id: "task3",
+    title: "Fitness Tracker App",
+    taskNumber: 3,
+    description: "Create a fully manual activity and biometric tracker displaying clean health progress visualizations.",
+    completed: true,
+    keyFeatures: [
+      "Track steps, water intake, active workout minutes, and calories burned",
+      "Manual log builder to add customized workouts, types, and timings",
+      "Weekly performance summary dashboard with live progress charts and calorie balances",
+      "Fluid interactive progress dials indicating goal-completion progress"
+    ]
+  },
+  {
+    id: "task4",
+    title: "Language Learning App",
+    taskNumber: 4,
+    description: "Build an interactive educational environment utilizing speech synthesis and testing modules.",
+    completed: true,
+    keyFeatures: [
+      "Learn essential vocabulary words across Spanish, French, German, Japanese, and Italian",
+      "Text-to-Speech audio support powered by standard browser Web Speech API synthesis",
+      "Multiple category lists (Vocabulary, Phrases, and Grammar rules)",
+      "Interactive knowledge check quizzes with performance tracking and badge achievements"
+    ]
+  }
+];
